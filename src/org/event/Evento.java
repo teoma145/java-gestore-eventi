@@ -38,7 +38,7 @@ public class Evento {
         return postiPrenotati;
     }
     public void prenota(int numPosti) throws Exception {
-        if (data.isBefore(LocalDate.now())) {
+        if (data.isBefore(LocalDate.now()) || data.equals(LocalDate.now())) {
             throw new Exception("Impossibile prenotare: l'evento è già passato.");
         }
         if (postiPrenotati + numPosti > postiTotali) {
@@ -47,9 +47,6 @@ public class Evento {
         postiPrenotati += numPosti;
     }
     public void disdici(int numPosti) throws Exception {
-        if (data.isBefore(LocalDate.now())) {
-            throw new Exception("Impossibile disdire: l'evento è già passato.");
-        }
         if (postiPrenotati < numPosti) {
             throw new Exception("Impossibile disdire: non ci sono abbastanza prenotazioni.");
         }
