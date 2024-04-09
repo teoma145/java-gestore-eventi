@@ -2,7 +2,8 @@ package org.event;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDate;
-
+import java.time.LocalTime;
+import java.math.BigDecimal;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -63,7 +64,7 @@ public class Main {
             System.out.println("Seleziona un'opzione:");
             System.out.println("1. Disdici posti");
             System.out.println("2. Esci");
-            System.out.println("Posti prenotati"+evento.getPostiPrenotati());
+            System.out.println("Posti prenotati "+evento.getPostiPrenotati());
             int sceltaDisdire = scan.nextInt();
             scan.nextLine();
             switch (sceltaDisdire){
@@ -74,7 +75,7 @@ public class Main {
                         scan.nextLine();
                         evento.disdici(numPosti);
                         System.out.println("Numero di posti disponibili: " + (evento.getPostiTotali() - evento.getPostiPrenotati()));
-                        System.out.println("posti prenotati: "+evento.getPostiPrenotati());
+                        System.out.println("posti prenotati:  "+evento.getPostiPrenotati());
                     }catch (Exception e){
                         System.out.println("Errore: " + e.getMessage());
                     }
@@ -89,6 +90,18 @@ public class Main {
 
 
         }
+        System.out.println("Descrizione  "+evento.toString());
+        String titolo = "Concerto sus";
+        LocalDate dataconcerto = LocalDate.of(2024, 4, 15);
+        int postiTotaliconcerto = 1000;
+        LocalTime ora = LocalTime.of(20, 30);
+        BigDecimal prezzo = new BigDecimal("25.50");
+        Concerto concerto = new Concerto(titolo, dataconcerto, postiTotaliconcerto, ora, prezzo);
+        System.out.println("Titolo: " + concerto.getTitolo());
+        System.out.println("Data formattata: " + concerto.getDataFormattata());
+        System.out.println("Ora formattata: " + concerto.getOraFormattata());
+        System.out.println("Prezzo formattato: " + concerto.getPrezzoFormattato());
+        System.out.println("Descrizione: " + concerto.toString());
     }
 
 }
