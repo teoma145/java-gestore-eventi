@@ -1,5 +1,6 @@
 package org.event;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Evento {
     private String titolo;
     private LocalDate data;
@@ -35,6 +36,29 @@ public class Evento {
 
     public int getPostiPrenotati() {
         return postiPrenotati;
+    }
+    public void prenota(int numPosti) throws Exception {
+        if (data.isBefore(LocalDate.now())) {
+            throw new Exception("Impossibile prenotare: l'evento è già passato.");
+        }
+        if (postiPrenotati + numPosti > postiTotali) {
+            throw new Exception("Impossibile prenotare: non ci sono abbastanza posti disponibili.");
+        }
+        postiPrenotati += numPosti;
+    }
+    public void disdici(int numPosti) throws Exception {
+        if (data.isBefore(LocalDate.now())) {
+            throw new Exception("Impossibile disdire: l'evento è già passato.");
+        }
+        if (postiPrenotati < numPosti) {
+            throw new Exception("Impossibile disdire: non ci sono abbastanza prenotazioni.");
+        }
+        postiPrenotati -= numPosti;
+    }
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(formatter) + " - " + titolo;
     }
 }
 
