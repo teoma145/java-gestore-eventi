@@ -1,6 +1,7 @@
 package org.event;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.math.BigDecimal;
@@ -102,6 +103,18 @@ public class Main {
         System.out.println("Ora formattata: " + concerto.getOraFormattata());
         System.out.println("Prezzo formattato: " + concerto.getPrezzoFormattato());
         System.out.println("Descrizione: " + concerto.toString());
+
+        ProgrammEvent programma = new ProgrammEvent("Programma di Eventi");
+        Evento evento1 = new Evento("Evento 1", LocalDate.now(), 100);
+        Evento evento2 = new Evento("Evento 2", LocalDate.now(), 110);
+        LocalDate dataOggi = LocalDate.now();
+        programma.aggiungiEvento(evento1);
+        programma.aggiungiEvento(evento2);
+        List<Evento> eventiOggi = programma.eventiInData(dataOggi);
+        System.out.println("Eventi di oggi:");
+        for (Evento ev : eventiOggi) {
+            System.out.println(ev.getTitolo());
+        }
     }
 
 }
